@@ -22,5 +22,19 @@ namespace RestaurantRater.Controllers
         {
             return View();
         }
+
+        //  POST: Restaurant/Create
+        [HttpPost]
+        public ActionResult Create([Bind(Include = "RestaurantID,Name")] Restaurant restaurant)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Restaurants.Add(restaurant);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(restaurant);
+        }
     }
 }
